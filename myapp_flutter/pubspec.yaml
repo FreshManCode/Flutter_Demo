@@ -34,6 +34,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   #安装相关依赖
   english_words: ^4.0.0
+  #webview相关 
+  flutter_webview_plugin: ^0.4.0
 
 # 开发环境依赖的工具包(而不是flutter应用本身依赖的包)
 dev_dependencies:

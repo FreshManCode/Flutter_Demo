@@ -5,8 +5,8 @@ import 'package:english_words/english_words.dart';
 import 'package:myapp_flutter/MyLearn/localAssets.dart';
 import 'package:myapp_flutter/MyLearn/nameRoute.dart';
 import 'package:myapp_flutter/MyLearn/route.dart';
+import 'package:myapp_flutter/learnWidgetList.dart';
 import 'widgetOne.dart';
-
 
 /* 
 Text:该Widget可让创建一个带格式的文本
@@ -40,7 +40,6 @@ class MyApp extends StatelessWidget {
       title: 'Startup Name Generator1',
       // 不是通过路由的方式来使用home组件
       // home: new RandomWords(),
-
       // 使用home路由
       initialRoute: "/",
       // 应用主题 (修改主题为白色) (整个背景变为变色,包括导航栏)
@@ -49,13 +48,14 @@ class MyApp extends StatelessWidget {
       ),
       // 注册路由表:
       routes: {
-        "tips_route":(context)=>TipRoute(key: Key('TipRoute'), text: "路由表中注册过的路由"),
+        "tips_route": (context) =>
+            TipRoute(key: Key('TipRoute'), text: "路由表中注册过的路由"),
         // 注册home路由
-        "/":(context)=> RandomWords(),
+        "/": (context) => RandomWords(),
         // 命名路由参数传递
-        "name_route_params":(context)=>NameRouteParams(),
+        "name_route_params": (context) => NameRouteParams(),
 
-        "local_assets":(context)=>MyLocalAssets(),
+        "local_assets": (context) => MyLocalAssets(),
       },
       // 可以看到,主需要在路由注册表中注册一下RandomWords路由,然后将其名为作为MaterialApp 的initialRoute
       // 属性即可,该属性决定了应用的初始路由是哪一个命名路由
@@ -155,18 +155,39 @@ class RandomWords extends StatefulWidget {
   }
 }
 
-class RandomWordsState extends State<RandomWords> {
+class RandomWordsState extends State<RandomWords>
+    with SingleTickerProviderStateMixin {
+  TabController? _tabController;
+  List tabs = ["首页", "首页"];
+  var _selectedIndex = 0;
   final _suggestions = <WordPair>[];
   final _saved = new Set<WordPair>();
   final TextStyle _biggerFont = new TextStyle(fontSize: 18.0);
-  // @override
-  // Widget build(BuildContext context) {
-  //   final wordPair = new WordPair.random();
-  //   return new Text(wordPair.asPascalCase);
-  // }
+
+  Widget learnWidget = Scaffold(
+    appBar: AppBar(
+      title: Text("组件学习"),
+    ),
+    body: WidgetList(),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    if (_tabController == null) {
+      _tabController = TabController(length: tabs.length, vsync: this);
+    }
+    _tabController?.addListener(() {
+      switch (_tabController?.index) {
+        case 0:
+          {}
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    Widget homeWidget = Scaffold(
       appBar: new AppBar(
         title: new Text('Startup Name Generator'),
         // 在AppBar 添加一个列表图标.当用户点击列表图标时,包含收藏夹的新路由页面入栈显示.
@@ -177,6 +198,51 @@ class RandomWordsState extends State<RandomWords> {
       ),
       body: _buildSuggestions(),
     );
+
+    return new Scaffold(
+      // appBar: new AppBar(
+      //   title: new Text('Startup Name Generator'),
+      //   // 在AppBar 添加一个列表图标.当用户点击列表图标时,包含收藏夹的新路由页面入栈显示.
+      //   actions: [
+      //     new IconButton(onPressed: _pushSaved, icon: new Icon(Icons.list)),
+      //     new IconButton(onPressed: _test, icon: new Icon(Icons.list_alt)),
+      //   ],
+      //   // bottom: TabBar(
+      //   //   controller: _tabController,
+      //   //   tabs: tabs
+      //   //       .map((e) => Tab(
+      //   //             text: e,
+      //   //           ))
+      //   //       .toList(),
+      //   // ),
+      // ),
+      body: _selectedIndex == 0 ? homeWidget : learnWidget,
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.business), title: Text('组件学习')),
+        ],
+        currentIndex: _selectedIndex,
+        fixedColor: Colors.blue,
+        onTap: _onItemTapped,
+      ),
+      drawer: Container(),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: _onAdd,
+      ),
+    );
+  }
+
+  _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  _onAdd() {
+    print("add event");
   }
 
 // 添加_pushSaved 方法

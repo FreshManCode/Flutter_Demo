@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:myapp_flutter/Layout/myLayout.dart';
 import 'package:myapp_flutter/MyLearn/appBar.dart';
 import 'package:myapp_flutter/MyLearn/bottomNavigationBar.dart';
 import 'package:myapp_flutter/MyLearn/container.dart';
+import 'package:myapp_flutter/MyLearn/cupertino.dart';
+import 'package:myapp_flutter/MyLearn/formTableType.dart';
 import 'package:myapp_flutter/MyLearn/image.dart';
 import 'package:myapp_flutter/MyLearn/localAssets.dart';
+import 'package:myapp_flutter/MyLearn/progressIndicator.dart';
 import 'package:myapp_flutter/MyLearn/route.dart';
 import 'package:myapp_flutter/MyLearn/row.dart';
+import 'package:myapp_flutter/MyLearn/stateManage.dart';
+import 'package:myapp_flutter/MyLearn/switchAndCheckbox.dart';
+import 'package:myapp_flutter/MyLearn/textStyle.dart';
+import 'package:myapp_flutter/container/containerList.dart';
 import 'package:myapp_flutter/two.dart';
 
 typedef void DidClickWidgetItem(ListItem);
@@ -29,6 +37,14 @@ List<ListItem> _itemLists() {
     ListItem(title: "路由名方式组件", type: "RouteNameType"),
     ListItem(title: "命名路由参数传递", type: "NameRouteNameType"),
     ListItem(title: "本地资源包管理", type: "LocalResourceType"),
+    ListItem(title: "Cupertino组件", type: "CupertinoType"),
+    ListItem(title: "状态管理", type: "StateManageType"),
+    ListItem(title: "文本及样式", type: "TextStyleType"),
+    ListItem(title: "单选开关和复选框", type: "SwitchAndCheckboxType"),
+    ListItem(title: "Form表单", type: "FormTableType"),
+    ListItem(title: "进度指示器", type: "ProgressIndicatorType"),
+    ListItem(title: "布局类组件", type: "FlowLayoutType"),
+    ListItem(title: "容器类组件", type: "MyContainerType"),
   ];
 }
 
@@ -58,6 +74,8 @@ _asyncPush(Widget widget, BuildContext context) async {
 }
 
 class WidgetList extends StatelessWidget {
+  final bool? customAppBar;
+  WidgetList({this.customAppBar});
   didClickItem(ListItem item, BuildContext context) {
     var widget;
     if (item.type == 'ContainerType') {
@@ -97,6 +115,42 @@ class WidgetList extends StatelessWidget {
     else if (item.type == 'LocalResourceType') {
       Navigator.pushNamed(context, "local_assets", arguments: "加载本地资源是吧");
       return;
+    } else if (item.type == 'CupertinoType') {
+      widget = CupertionTestRoute();
+      Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+        return new Scaffold(
+          body: widget,
+        );
+      }));
+      return;
+    }
+    // 状态管理
+    else if (item.type == "StateManageType") {
+      widget = StateManagerContainer();
+    }
+    // 文本及样式
+    else if (item.type == "TextStyleType") {
+      widget = MyTextStyle();
+    }
+    // 单选开关和复选框
+    else if (item.type == "SwitchAndCheckboxType") {
+      widget = SwitchAndCheckBoxTestRoute();
+    }
+    // form表单
+    else if (item.type == "FormTableType") {
+      widget = FormTestRoute();
+    }
+    // 进度指示器
+    else if (item.type == "ProgressIndicatorType") {
+      widget = MyProgressIndicator();
+    }
+    // 布局类组件
+    else if (item.type == "FlowLayoutType") {
+      widget = MyLayoutList();
+    }
+    // 容器类组件
+    else if (item.type == "MyContainerType") {
+      widget = MyContainerListRoute();
     }
 
     print("点击了item:$item");
