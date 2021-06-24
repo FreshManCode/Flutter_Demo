@@ -14,6 +14,7 @@ import 'package:myapp_flutter/MyLearn/stateManage.dart';
 import 'package:myapp_flutter/MyLearn/switchAndCheckbox.dart';
 import 'package:myapp_flutter/MyLearn/textStyle.dart';
 import 'package:myapp_flutter/container/containerList.dart';
+import 'package:myapp_flutter/scrollview/scrollviewList.dart';
 import 'package:myapp_flutter/two.dart';
 
 typedef void DidClickWidgetItem(ListItem);
@@ -45,6 +46,7 @@ List<ListItem> _itemLists() {
     ListItem(title: "进度指示器", type: "ProgressIndicatorType"),
     ListItem(title: "布局类组件", type: "FlowLayoutType"),
     ListItem(title: "容器类组件", type: "MyContainerType"),
+    ListItem(title: "可滚动组件", type: "ScrollViewType"),
   ];
 }
 
@@ -152,6 +154,10 @@ class WidgetList extends StatelessWidget {
     else if (item.type == "MyContainerType") {
       widget = MyContainerListRoute();
     }
+    // TODO:可滚动组件
+    else if (item.type == "ScrollViewType") {
+      widget = MyScrollViewListRoute();
+    }
 
     print("点击了item:$item");
     Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
@@ -186,6 +192,8 @@ class WidgetList extends StatelessWidget {
 
     return new Material(
       child: new ListView(
+        // 设置每个Row的高度
+        itemExtent: 60.0,
         padding: new EdgeInsets.symmetric(vertical: 8.0),
         children: divided,
       ),

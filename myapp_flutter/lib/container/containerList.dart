@@ -97,7 +97,5 @@ List<ListItem> _itemLists() {
     ListItem(title: "变换Transform.scale", type: "Transform.scaleType"),
     ListItem(title: "RotatedBox(会改变Layout)", type: "RotatedBoxType"),
     ListItem(title: "Container", type: "ContainerType"),
-
-    
   ];
 }
