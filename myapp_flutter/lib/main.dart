@@ -5,6 +5,7 @@ import 'package:english_words/english_words.dart';
 import 'package:myapp_flutter/MyLearn/localAssets.dart';
 import 'package:myapp_flutter/MyLearn/nameRoute.dart';
 import 'package:myapp_flutter/MyLearn/route.dart';
+import 'package:myapp_flutter/functionalWidget/functionalWidgetList.dart';
 import 'package:myapp_flutter/learnWidgetList.dart';
 import 'widgetOne.dart';
 
@@ -171,6 +172,7 @@ class RandomWordsState extends State<RandomWords>
     body: WidgetList(),
   );
 
+  Widget functionalWidget = MyFunctionalWidgetListRoute();
 
   @override
   void initState() {
@@ -200,6 +202,8 @@ class RandomWordsState extends State<RandomWords>
       body: _buildSuggestions(),
     );
 
+    List<Widget> homeWigets = [learnWidget, homeWidget, functionalWidget];
+
     return new Scaffold(
       // appBar: new AppBar(
       //   title: new Text('Startup Name Generator'),
@@ -217,12 +221,21 @@ class RandomWordsState extends State<RandomWords>
       //   //       .toList(),
       //   // ),
       // ),
-      body: _selectedIndex == 0 ? homeWidget : learnWidget,
+      body: _selectedIndex < homeWigets.length ? homeWigets[_selectedIndex] : homeWigets.first ,
       bottomNavigationBar: BottomNavigationBar(
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.business), title: Text('组件学习')),
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            title: Text('组件学习'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.phone),
+            title: Text('功能型组件'),
+          ),
         ],
         currentIndex: _selectedIndex,
         fixedColor: Colors.blue,

@@ -1,8 +1,10 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp_flutter/learnWidgetList.dart';
+import 'package:myapp_flutter/scrollview/customScrollView.dart';
 import 'package:myapp_flutter/scrollview/gridView.dart';
 import 'package:myapp_flutter/scrollview/listView.dart';
+import 'package:myapp_flutter/scrollview/monitorScrollView.dart';
 import 'package:myapp_flutter/scrollview/singleChildScrollView.dart';
 
 List<ListItem> _items() {
@@ -13,10 +15,14 @@ List<ListItem> _items() {
     ListItem(title: "无限下拉ListView", type: "ListViewType_Infinite"),
     ListItem(title: "GridView(Simple)", type: "GridViewSimpleType"),
     ListItem(title: "GridView(Count)", type: "GridViewCountType"),
-    ListItem(title: "GridView(MaxCrossAxisExtent)", type: "GridViewCrossAxisExtentType"),
-    ListItem(title: "GridView(Extent)", type: "GridViewCrossAxisSimpleExtentType"),
+    ListItem(
+        title: "GridView(MaxCrossAxisExtent)",
+        type: "GridViewCrossAxisExtentType"),
+    ListItem(
+        title: "GridView(Extent)", type: "GridViewCrossAxisSimpleExtentType"),
     ListItem(title: "GridView.builder", type: "GridView.builderType"),
-    
+    ListItem(title: "CustomScrollView", type: "CustomScrollViewType"),
+    ListItem(title: "滚动监听以及控制", type: "MonitorAndControlScrollType"),
   ];
 }
 
@@ -36,19 +42,29 @@ class MyScrollViewListRoute extends StatelessWidget {
     } else if (item.type == "ListViewType_Infinite") {
       myWidget = MyInfiniteListView();
     } else if (item.type == "GridViewSimpleType") {
-      myWidget = MyGridViewRoute(gridViewIndex: 0,);
-    }
-    else if (item.type == "GridViewCountType") {
-      myWidget = MyGridViewRoute(gridViewIndex: 1,);
-    }
-    else if (item.type == "GridViewCrossAxisExtentType") {
-      myWidget = MyGridViewRoute(gridViewIndex: 2,);
-    }
-    else if(item.type == "GridViewCrossAxisSimpleExtentType") {
-      myWidget = MyGridViewRoute(gridViewIndex: 3,);
-    }
-    else if(item.type == "GridView.builderType") {
-      myWidget = MyGridViewRoute(gridViewIndex: 4,);
+      myWidget = MyGridViewRoute(
+        gridViewIndex: 0,
+      );
+    } else if (item.type == "GridViewCountType") {
+      myWidget = MyGridViewRoute(
+        gridViewIndex: 1,
+      );
+    } else if (item.type == "GridViewCrossAxisExtentType") {
+      myWidget = MyGridViewRoute(
+        gridViewIndex: 2,
+      );
+    } else if (item.type == "GridViewCrossAxisSimpleExtentType") {
+      myWidget = MyGridViewRoute(
+        gridViewIndex: 3,
+      );
+    } else if (item.type == "GridView.builderType") {
+      myWidget = MyGridViewRoute(
+        gridViewIndex: 4,
+      );
+    } else if (item.type == "CustomScrollViewType") {
+      myWidget = MyCustomScrollViewRoute();
+    } else if (item.type == "MonitorAndControlScrollType") {
+      myWidget = MyMointorListViewScrollRoute();
     }
     // MaterialPageRoute
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
