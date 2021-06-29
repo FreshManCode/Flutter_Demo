@@ -8,6 +8,7 @@ import 'package:myapp_flutter/functionalWidget/customPaintWidget.dart';
 import 'package:myapp_flutter/functionalWidget/dialog.dart';
 import 'package:myapp_flutter/functionalWidget/futureUI.dart';
 import 'package:myapp_flutter/functionalWidget/inheritedWidget.dart';
+import 'package:myapp_flutter/functionalWidget/paintGradientWidget.dart';
 import 'package:myapp_flutter/functionalWidget/willPopScope.dart';
 import 'package:myapp_flutter/learnWidgetList.dart';
 
@@ -46,6 +47,9 @@ class MyFunctionalWidgetListRoute extends StatelessWidget {
     }
     else if(item.type == "CustomPaintWidget") {
       myWidget = MyCustomPaintRoute();
+    }
+    else if (item.type == "CustomPaintGradientWidget") {
+      myWidget = MyGradientCircularProgressRoute();
     }
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
       return Scaffold(
@@ -92,8 +96,7 @@ List<ListItem> _itemLists() {
     ListItem(title: "回调函数功能学习", type: "CallBackWidget"),
     ListItem(title: "组合现有组件", type: "CompositeCurrentWidget"),
     ListItem(title: "组合实例TurnBox", type: "CompositTurnBoxWidget"),
-    ListItem(title: "自会组件(CustomPaint与Canvas)", type: "CustomPaintWidget"),
-     
-    
+    ListItem(title: "自绘组件(CustomPaint与Canvas)", type: "CustomPaintWidget"),
+    ListItem(title: "自绘组件(圆形背景渐变进度条)", type: "CustomPaintGradientWidget"),
   ];
 }

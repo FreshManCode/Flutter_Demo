@@ -14,6 +14,7 @@ import 'package:myapp_flutter/MyLearn/stateManage.dart';
 import 'package:myapp_flutter/MyLearn/switchAndCheckbox.dart';
 import 'package:myapp_flutter/MyLearn/textStyle.dart';
 import 'package:myapp_flutter/container/containerList.dart';
+import 'package:myapp_flutter/fileHandleAndNetwork/handleFileAndNetworkList.dart';
 import 'package:myapp_flutter/scrollview/scrollviewList.dart';
 import 'package:myapp_flutter/two.dart';
 
@@ -47,6 +48,7 @@ List<ListItem> _itemLists() {
     ListItem(title: "布局类组件", type: "FlowLayoutType"),
     ListItem(title: "容器类组件", type: "MyContainerType"),
     ListItem(title: "可滚动组件", type: "ScrollViewType"),
+    ListItem(title: "文件操作与网络请求List", type: "HandleFileAndNetworkList"),
   ];
 }
 
@@ -157,6 +159,8 @@ class WidgetList extends StatelessWidget {
     // TODO:可滚动组件
     else if (item.type == "ScrollViewType") {
       widget = MyScrollViewListRoute();
+    } else if (item.type == "HandleFileAndNetworkList") {
+      widget = MyHandleFileAndNetworkListRoute();
     }
 
     print("点击了item:$item");
